@@ -1,0 +1,152 @@
+﻿
+@using Movie_Web_Mvc.ViewModel;
+@model RegisterViewModel;
+
+@if (TempData["Error"] != null)
+{
+    <div class="col-md-12 alert alert-danger">
+        <span><b>Sorry!</b> - @TempData["Error"] </span>
+    </div>
+}
+<style>
+    body {
+        background: url(https://inc42.com/wp-content/uploads/2019/12/Untitled-design-2019-12-09T080908.682.jpg);
+      
+
+        background-size: auto;
+    }
+
+    .mt-4 {
+        margin-top:5rem !important;
+    }
+    .loginBox {
+/*        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);*/
+        width: 350px;
+        height: 440px;
+/*        padding: 0px 60px 54px 25px;*/
+        box-sizing: border-box;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+        .loginBox h3 {
+            margin: -12px;
+            /*padding: 0 0 26px;*/
+            padding: 7px 0 26px;
+            color: #ff8c00;
+            text-align: center;
+        }
+        .loginBox h2 {
+/*            margin: -12px;
+            padding: 0 0 26px;
+            padding: 7px 0 26px;*/
+            color: #ff8c00;
+            text-align: center;
+        }
+
+        .loginBox .form-group {
+            margin-bottom: 20px;
+        }
+
+        .loginBox label {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .loginBox input[type="text"],
+        .loginBox input[type="password"] {
+            border: none;
+            border-bottom: 1px solid #fff;
+            background: transparent;
+            outline: none;
+            height: 24px;
+            color: #fff;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .loginBox .text-danger {
+            color: #fff;
+        }
+
+        .loginBox button[type="submit"] {
+            border: none;
+            outline: none;
+            height: 40px;
+            color: #eee;
+            font-size: 16px;
+            background-color: #FF8C00;
+            cursor: pointer;
+            border-radius: 20px;
+            margin: 12px 0 18px;
+            width: 100%;
+        }
+
+            .loginBox button[type="submit"]:hover {
+                background-color: #ff9719;
+                color: #fff;
+            }
+
+        .loginBox a {
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            align-content: center;
+        
+        }
+
+        .loginBox .login-heading {
+            margin:0;
+            padding:0;
+            text-align: center;
+        }
+</style>
+
+<div class="container-fluid d-flex align-items-center justify-content-center mt-4">
+<div class="loginBox">
+    @*<h2>Register </h2>*@
+        <h2 class="login-heading">Register</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.FullName)
+            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+        </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.EmailAddress)
+                @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "text-danger" })
+            </div>
+       @* <div class="form-group">
+            @Html.LabelFor(m => m.EmailAddress)
+            @Html.PasswordFor(m => m.EmailAddress, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "text-danger" })
+        </div>*@
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword)
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">SignUp</button>
+        </div>
+    }
+</div>
+</div>

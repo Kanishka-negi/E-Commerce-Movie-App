@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Movie>
+
+@{
+    ViewData["Title"] = "List of Movies";
+}
+
+@*<div class="container-fluid">*@
+    @*<div class="container">*@
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+    <div class="row">
+        <div class="col">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <a href="/Account/Login">
+                            <img src="https://assets-in.bmscdn.com/promotions/cms/creatives/1682617779318_webbannernpa.jpg" class="d-block w-100" alt="...">
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://assets-in.bmscdn.com/promotions/cms/creatives/1686681011716_motogpweb.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <a href="/Cinemas/Details/4">
+                        <img src="https://assets-in.bmscdn.com/promotions/cms/creatives/1687155832316_mirajcinemasdesktop.jpg" class="d-block w-100" alt="...">
+                        </a>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row mt-4">
+    <center><h3>Recommended Movies</h3></center>
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" src="@item.Logo" alt="Movie Logo" width="200" height="200">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <span class="badge bg-success text-white" style="text-transform: uppercase;">@item.Name</span>
+                    </h5>
+                    <h6 class="card-title">@item.Description</h6>
+                    <p class="card-text"><b>Price:</b> @item.Price</p>
+                    <p class="card-text"><b>Start Time:</b> @item.StartDate</p>
+                    <p class="card-text"><b>End Time:</b> @item.EndDate</p>
+                    <p class="card-text"><b>Category:</b> @item.MovieCategory</p>
+                    <p class="card-text">
+                        <b>Status: </b>
+                        @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
+                        {
+                            <span class="badge bg-success text-white">AVAILABLE</span>
+                        }
+                        else if (DateTime.Now > item.EndDate)
+                        {
+                            <span class="badge bg-danger text-white">EXPIRED</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-primary text-white">UPCOMING</span>
+                        }
+                    </p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a class="btn btn-outline-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="bi bi-eye-fill"></i> Show Details
+                    </a>
+                    <a class="btn btn-success text-white @(DateTime.Now > item.EndDate ? "disabled" : "")"
+                   asp-controller="Order"
+                   asp-action="AddToShoppingCart"
+                   asp-route-id="@item.Id">
+                        <i class="bi bi-cart-plus"></i> Add to Cart (Price @item.Price.ToString("c"))
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

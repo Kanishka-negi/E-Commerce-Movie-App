@@ -1,0 +1,5 @@
+﻿@if (User.Identity.IsAuthenticated && User.IsInRole("Admin")){
+<a asp-controller="Cinema" asp-action="Create" class="btn btn-success">
+    <i class="bi bi-plus-circle-fill"></i>Add New
+</a>
+}
