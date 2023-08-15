@@ -1,4 +1,6 @@
 Movie eCommerce Application
+
+
 Welcome to the Movie eCommerce Application repository! This application is built using ASP.NET MVC and Entity Framework Core, with responsive design using Bootstrap, and a SQL Server 2019 database backend.
 Features
 Browse and search for movies available in the eCommerce store.
